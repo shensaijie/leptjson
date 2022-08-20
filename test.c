@@ -339,7 +339,18 @@ static void test_parse() {
     test_parse_invalid_unicode_hex();
     test_parse_invalid_unicode_surrogate();
     test_parse_miss_comma_or_square_bracket();
-    
+    test_parse_miss_key();
+    test_parse_miss_colon();
+    test_parse_miss_comma_or_curly_bracket();
+}
+
+static void test_access_null() {
+    lept_value v;
+    lept_init(&v);
+    lept_set_string(&v, "a", 1);
+    lept_set_null(&v);
+    EXPECT_EQ_INT(LEPT_NULL, lept_get_type(&v));
+    lept_free(&v);
 }
 
 static void test_access_boolean() {
@@ -372,14 +383,19 @@ static void test_access_string() {
     lept_free(&v);
 }
 
+static void test_access() {
+    test_access_null();
+    test_access_boolean();
+    test_access_number();
+    test_access_string();
+}
+
 int main() {
 #ifdef _WINDOWS
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
     test_parse();
-    test_access_boolean();
-    test_access_number();
-    test_access_string();
+    test_access();
     printf("%d/%d (%3.2f%%) passed\n", test_pass, test_count, test_pass * 100.0 / test_count);
     return main_ret;
 }
