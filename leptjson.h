@@ -21,7 +21,8 @@ enum {                          //lept_parse返回值
     LEPT_PARSE_NUMBER_TOO_BIG,       //数字超出范围
     LEPT_PARSE_MISS_QUOTATION_MARK,   //引号不配对
     LEPT_PARSE_INVALID_STRING_ESCAPE,
-    LEPT_PARSE_INVALID_STRING_CHAR
+    LEPT_PARSE_INVALID_STRING_CHAR,
+    LEPT_PARSE_INVALID_UNICOD_HEX
 };
 
 #define lept_init(v) do { (v)->type = LEPT_NULL; } while(0)

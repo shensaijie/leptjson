@@ -105,6 +105,8 @@ static void test_parse_string() {
     TEST_STRING("shensaijie", "\"shensaijie\"");
     TEST_STRING("Hello\nWorld", "\"Hello\\nWorld\"");
     TEST_STRING("\" \\ / \b \f \n \r \t", "\"\\\" \\\\ \\/ \\b \\f \\n \\r \\t\"");
+    TEST_STRING("\x24", "\"\\u0024\"");
+    TEST_STRING("…Í»¸Ω‹", "\"\u7533\u8D5B\u6770\"");
 }
 
 
