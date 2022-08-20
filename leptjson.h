@@ -1,6 +1,7 @@
 #ifndef LEPTJSON_H_
-
 #define LEPTJSON_H_
+
+#include <stddef.h>
 
 //声明枚举类型（enumeration type)
 typedef enum { LEPT_NULL, LEPT_FALSE, LEPT_TRUE, LEPT_NUMBER, LEPT_STRING, LEPT_ARRAY, LEPT_OBJECT} lept_type;
@@ -34,9 +35,9 @@ enum {                          //lept_parse返回值
 
 int lept_parse(lept_value* v, const char* json);
 
-lept_type lept_get_type(const lept_value* v);
-
 void lept_free(lept_value* v);
+
+lept_type lept_get_type(const lept_value* v);
 
 #define lept_set_null(v) lept_free(v)
 
@@ -51,7 +52,6 @@ size_t lept_get_string_length(const lept_value* v);
 void lept_set_string(lept_value* v, const char* s, size_t len);
 
 size_t lept_get_array_size(const lept_value* v);
-
 lept_value* lept_get_array_element(const lept_value* v, size_t index);
 
 #endif 

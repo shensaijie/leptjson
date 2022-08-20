@@ -1,3 +1,7 @@
+#ifdef _WINDOWS
+#define _CRTDBG_MAP_ALLOC
+#include <crtdbg.h>
+#endif
 #include "leptjson.h"
 #include <assert.h>
 #include <errno.h>   /* errno, ERANGE */
@@ -250,16 +254,25 @@ int lept_parse(lept_value* v, const char* json) {
     return ret;
 }
 
+void lept_free(lept_value* v) {
+    size_t i;
+    assert(v != NULL);
+    switch (v->type) {
+        case LEPT_STRING:
+            free(v->u.s.s);
+            break;
+        case LEPT_ARRAY:
+            for (i = 0; i < v->u.a.size; i++)
+                lept_free(&v->u.a.e[i]);
+            free(v->u.a.e);
+            break;
+        default: break;
+    }
+    v->type = LEPT_NULL;
+}
 
 lept_type lept_get_type(const lept_value* v) {
     return v->type;
-}
-
-void lept_free(lept_value* v) {
-    assert(v != NULL);
-    if (v->type == LEPT_STRING)
-        free(v->u.s.s);
-    v->type = LEPT_NULL;
 }
 
 int lept_get_boolean(const lept_value* v) {
