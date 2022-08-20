@@ -22,7 +22,8 @@ enum {                          //lept_parse返回值
     LEPT_PARSE_MISS_QUOTATION_MARK,   //引号不配对
     LEPT_PARSE_INVALID_STRING_ESCAPE,
     LEPT_PARSE_INVALID_STRING_CHAR,
-    LEPT_PARSE_INVALID_UNICOD_HEX
+    LEPT_PARSE_INVALID_UNICODE_HEX,
+    LEPT_PARSE_INVALID_UNICODE_SURROGATE
 };
 
 #define lept_init(v) do { (v)->type = LEPT_NULL; } while(0)
